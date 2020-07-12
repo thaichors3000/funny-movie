@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_12_194559) do
+ActiveRecord::Schema.define(version: 2020_07_12_201553) do
+
+  create_table "movies", force: :cascade do |t|
+    t.string "url"
+    t.integer "author_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_movies_on_author_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
