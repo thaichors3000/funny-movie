@@ -11,10 +11,23 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
     </ul>
-    <%= form_for User.new, html: { class: "form-inline my-2 my-lg-0" } do |f|%>
-      <%= f.text_field :username, class: "form-control mr-sm-2" %>
-      <%= f.password_field :password, class: "form-control mr-sm-2" %><br>
-      <%= f.submit "Login / Register", class: "btn btn-outline-success my-2 my-sm-0" %>
-    <%end%>
+
+    <% if logged_in? %>
+      <div class="navbar-text mr-4">
+        Welcome
+        <span class="font-weight-bold"><%= current_user.username %></span>
+      </div>
+
+      <%= link_to 'Share a movie', nil, class: 'btn btn-outline-success my-2 my-sm-0 mr-4' %>
+      <%= form_with url: logout_path, local: true, html: { class: 'form-inline my-2 my-lg-0' } do %>
+        <%= submit_tag 'Logout', class: 'btn btn-outline-success my-2 my-sm-0' %>
+      <% end %>
+    <% else %>
+      <%= form_with url: login_or_register_path, local: true, html: { class: 'form-inline my-2 my-lg-0' } do %>
+        <%= text_field_tag :username, nil, class: 'form-control mr-sm-2', placeholder: 'username' %>
+        <%= password_field_tag :password, nil, class: 'form-control mr-sm-2', placeholder: 'password' %><br>
+        <%= submit_tag 'Login / Register', class: 'btn btn-outline-success my-2 my-sm-0' %>
+      <% end %>
+    <% end %>
   </div>
 </nav>
