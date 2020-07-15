@@ -4,10 +4,17 @@ class SessionsController < ApplicationController
 
     if @user.new_record?
       @user.password = param_password
-      @user.save!
+      @user.save
+      flash[:success] = 'Register successfully'
+      session[:user_id] = @user.id
+    else
+      if @user.authenticate(param_password)
+        flash[:success] = 'Login successfully'
+        session[:user_id] = @user.id
+      else
+        flash[:error] = 'Login unsuccessfully'
+      end
     end
-
-    session[:user_id] = @user.id
 
     redirect_to root_path
   end
@@ -20,10 +27,6 @@ class SessionsController < ApplicationController
   end
 
   private
-
-  def user_params
-    params.require(:user).permit(:username, :password)
-  end
 
   def param_username
     params.require(:username)
