@@ -1,0 +1,14 @@
+<%= form_with model: @movie, locale: true do |f| %>
+  <div class="form-group row">
+    <%= f.label :url, class: 'col-sm-2 col-form-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :url, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10 offset-sm-2">
+      <%= f.submit 'Share', class: 'btn btn-outline-success' %>
+    </div>
+  </div>
+<% end %>

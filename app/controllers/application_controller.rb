@@ -9,4 +9,14 @@ class ApplicationController < ActionController::Base
   def logged_in?
     !current_user.nil?
   end
+
+  private
+
+  def require_authenticate!
+    unless logged_in?
+      flash[:notice] = 'Require login or register'
+
+      redirect_to root_path
+    end
+  end
 end

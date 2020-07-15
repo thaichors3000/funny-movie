@@ -18,7 +18,7 @@
         <span class="font-weight-bold"><%= current_user.username %></span>
       </div>
 
-      <%= link_to 'Share a movie', nil, class: 'btn btn-outline-success my-2 my-sm-0 mr-4' %>
+      <%= link_to 'Share a movie', new_movie_path, class: 'btn btn-outline-success my-2 my-sm-0 mr-4' %>
       <%= link_to 'Logout', logout_path, class: 'btn btn-outline-success my-2 my-sm-0', method: :delete, data: { confirm: 'Are you sure?' } %>
     <% else %>
       <%= form_with url: login_or_register_path, local: true, html: { class: 'form-inline my-2 my-lg-0' } do %>
