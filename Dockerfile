@@ -11,11 +11,11 @@ RUN apt-get update -qq && apt-get install -y nodejs yarn postgresql-client
 WORKDIR /app
 
 # We copy these files from our current application to the /app container
-COPY Gemfile /app/Gemfile
-COPY Gemfile.lock /app/Gemfile.lock
+COPY Gemfile Gemfile.lock package.json yarn.lock /app/
 
 # We install all the dependencies
 RUN bundle install
+RUN yarn install
 
 # We copy all the files from our current application to the /app container
 COPY . /app
